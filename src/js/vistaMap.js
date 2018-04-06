@@ -1,14 +1,17 @@
 
 
-
+/*
+Funcion que recibe un arreglo de reclamos que se pueden hacer y los muestra en un popUP
+*/
 function mostrar(arreglo){
+	//Remueve los hijos del panel de reclamos
 	var cell = document.getElementById("panelReclamos");
 	if ( cell.hasChildNodes() ){
 		while ( cell.childNodes.length >= 1 ){
 			cell.removeChild( cell.firstChild );
 		}
 	}
-	
+	//Crea la estructura del panel de reclamos
 	var titulo = $("<h4></h4>").text("Elija su Reclamo:");
 	titulo.attr("class","modal-title");
 	var divHeader = $("<div></div>").attr("class","modal-header");
@@ -18,17 +21,21 @@ function mostrar(arreglo){
 	divContent.append(divHeader);
 	divContent.append(divBody);
 	$(panelReclamos).append(divContent);
-	
+	//Agrega cada tipo de reclamo al panel de reclamos
 	var index;
 	for(index = 0; index < arreglo.length; ++index){
 		agregarComponente(arreglo[index],divContent);
 	}
-	
+	//Crea el popUP
 	$(panelReclamos).dialog();
+	//Muestra el popUP
 	$(panelReclamos).show();
 	
 }
 
+/*
+Funcion que agrega cada tipo de reclamo al contenedor del panel de reclamos
+*/
 function agregarComponente(componente,divContent){
 	var tituloReclamo = $("<label></label>").text(componente.titulo);
 	tituloReclamo.attr("class","modal-title");
@@ -48,17 +55,21 @@ function agregarComponente(componente,divContent){
 	
 }
 
+/*
+Funcion que crea un popUP para ingresar una descripcion al reclamo
+*/
 function ingresarDescripcion(componente){
+	//Oculta el popUp Anterior y lo cierra
 	$(panelReclamos).hide();
 	$(panelReclamos).dialog("close");
+	//Remueve los hijso del panel de descripcion
 	var cell = document.getElementById("panelDescripcion");
-
 	if ( cell.hasChildNodes() ){
 		while ( cell.childNodes.length >= 1 ){
 			cell.removeChild( cell.firstChild );
 		}
 	}
-	$(panelDescripcion).show();
+	//Crear el contenido del popUP
 	var textArea = $("<textarea></textarea>").attr("class","form-control");
 	textArea.attr("type","textarea");
 	textArea.attr("name","message");
@@ -91,5 +102,8 @@ function ingresarDescripcion(componente){
 	divContent.append(divBody);
 	
 	$(panelDescripcion).append(divContent);
+	//Crear el popUp
 	$(panelDescripcion).dialog();
+	//Muestra el popUp
+	$(panelDescripcion).show();
 }
