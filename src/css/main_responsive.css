@@ -581,7 +581,7 @@ a{
 }
 
 
-@media (max-width:800px){
+@media (max-width:200px){
     header .logo{
         float: none;
     }
