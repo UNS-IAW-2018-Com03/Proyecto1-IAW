@@ -33,7 +33,9 @@ function mostrar(arreglo){
 		
 	}
 	//Crea el popUP
-	$(panelReclamos).dialog();
+	$(panelReclamos).dialog({
+		closeText: 'X'
+	});
 	//Muestra el popUP
 	$(panelReclamos).show();
 	
@@ -117,7 +119,9 @@ function ingresarDescripcion(componente){
 		
 		$(panelDescripcion).append(divContent);
 		//Crear el popUp
-		$(panelDescripcion).dialog();
+		$(panelDescripcion).dialog({
+			closeText: 'X'
+		});
 		//Muestra el popUp
 		$(panelDescripcion).show();
 	}
