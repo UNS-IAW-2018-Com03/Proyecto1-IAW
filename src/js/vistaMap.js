@@ -18,13 +18,15 @@ function mostrar(arreglo){
 	divHeader.append(titulo);
 	var divBody	= $("<div></div>").attr("class","modal-body");
 	var divContent = $("<div></div>").attr("class","modal-content");
+	var divGroup = $("<div></div>").attr("class","form-group");
+	divBody.append(divGroup);
 	divContent.append(divHeader);
 	divContent.append(divBody);
 	$(panelReclamos).append(divContent);
 	//Agrega cada tipo de reclamo al panel de reclamos
 	var index;
 	for(index = 0; index < arreglo.length; ++index){
-		agregarComponente(arreglo[index],divContent);
+		agregarComponente(arreglo[index],divGroup);
 	}
 	//Crea el popUP
 	$(panelReclamos).dialog();
@@ -39,6 +41,7 @@ Funcion que agrega cada tipo de reclamo al contenedor del panel de reclamos
 function agregarComponente(componente,divContent){
 	var tituloReclamo = $("<label></label>").text(componente.titulo);
 	tituloReclamo.attr("class","modal-title");
+	tituloReclamo.attr("class","centrado-porcentual");
 	var imgReclamo = $("<img></img>").attr("src", componente.imagen);
 	var botonReclamo = $("<button></button>");
 	botonReclamo.append(imgReclamo);
@@ -50,8 +53,10 @@ function agregarComponente(componente,divContent){
 	
 	divReclamo.append(botonReclamo);
 	divReclamo.append(tituloReclamo);
+	var divisor = $("<div></div>").attr("class","box-content");
 	
 	divContent.append(divReclamo);
+	divContent.append(divisor);
 	
 }
 
@@ -77,12 +82,13 @@ function ingresarDescripcion(componente){
 	textArea.attr("placeholder","Escriba su mensaje aquí.");
 	textArea.attr("maxlength","500");
 	textArea.attr("rows","7");
-	var lblText = $("<label></label>").text("Descripción:");
+	var lblText = $("<label></label>").text("Escriba una descripcion de su reclamo (máx 500 caracteres)");
 	lblText.attr("for","name");
+	var divisor = $("<div></div>").attr("class","box-content");
 	var divGroup = $("<div></div>").attr("class","form-group");
 	divGroup.append(lblText);
+	divGroup.append(divisor);
 	divGroup.append(textArea);
-	var p = $("<p></p>").text( "Escriba una descripcion de su reclamo con un máximo de 500 caracteres.");
 	var btnEnviar = $("<button></button>").text("Enviar Reclamo →");
 	btnEnviar.attr("type","submit");
 	btnEnviar.attr("class","btn btn-lg btn-success btn-block");
@@ -90,7 +96,6 @@ function ingresarDescripcion(componente){
 		guardarReclamo(componente, latitud, longitud);
 	});
 	var divBody	= $("<div></div>").attr("class","modal-body");
-	divBody.append(p);
 	divBody.append(divGroup);
 	divBody.append(btnEnviar);
 	var titulo = $("<h4></h4>").text("Describa su Reclamo:");

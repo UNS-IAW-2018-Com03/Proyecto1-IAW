@@ -87,3 +87,21 @@ footer .rights a{
 a{
     color: #3b3b3b;
 }
+
+.navbar {
+    margin-bottom: 00px;
+}
+
+.box-content {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+}
+
+.centrado-porcentual {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
