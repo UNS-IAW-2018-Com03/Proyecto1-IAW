@@ -47,6 +47,7 @@ function agregarComponente(componente,divContent){
 	tituloReclamo.attr("class","modal-title");
 	tituloReclamo.attr("class","centrado-porcentual");
 	var imgReclamo = $("<img></img>").attr("src", componente.imagen);
+	imgReclamo.attr("alt",componente.titulo);
 	var botonReclamo = $("<button></button>");
 	botonReclamo.append(imgReclamo);
 	botonReclamo.click(function(){
