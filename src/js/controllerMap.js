@@ -119,6 +119,8 @@ function localizacionMapa(map){
             map.setCenter(pos);
 			//Una vez localizado te carga todos los reclamos realizados del localStorage
 			mostrarTodosReclamosRealizados();
+			//Muestra una ventana de ayuda
+			mostrarAyuda();
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -255,4 +257,11 @@ function mostrarTodosReclamosRealizados(){
 			mostrarReclamo(reclamo.titulo,reclamo.imagen,reclamo.longitud,reclamo.latitud,reclamo.descripcion,reclamo.fecha);			
 		}
 	}
+}
+
+/*
+Funcion que llama a la vista para crear el popUp de ayuda
+*/
+function mostrarAyuda(){
+		crearAyudaPopUp();
 }

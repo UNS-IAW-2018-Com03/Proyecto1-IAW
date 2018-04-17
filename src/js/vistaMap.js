@@ -62,8 +62,6 @@ function agregarComponente(componente,divContent){
 	divReclamo.append(tituloReclamo);
 	
 	divContent.append(divReclamo);
-	
-	
 }
 
 /*
@@ -83,46 +81,78 @@ function ingresarDescripcion(componente){
 	$(panelReclamos).dialog("close");
 	//Remueve los hijso del panel de descripcion
 	var cell = document.getElementById("panelDescripcion");
+	if ( cell.hasChildNodes() ){
+		while ( cell.childNodes.length >= 1 ){
+			cell.removeChild( cell.firstChild );
+		}
+	}
+		
+	//Crear el contenido del popUP
+	var textArea = $("<textarea></textarea>").attr("class","form-control");
+	textArea.attr("type","textarea");
+	textArea.attr("name","message");
+	textArea.attr("id","txtDescripcion");
+	textArea.attr("placeholder","Escriba su mensaje aquí.");
+	textArea.attr("maxlength","500");
+	textArea.attr("rows","7");
+	var lblText = $("<label></label>").text("Escriba una descripcion de su reclamo (máx 500 caracteres)");
+	lblText.attr("for","name");
+	var divisor = $("<div></div>").attr("class","box-content");
+	var divGroup = $("<div></div>").attr("class","form-group");
+	divGroup.append(lblText);
+	divGroup.append(divisor);
+	divGroup.append(textArea);
+	var btnEnviar = $("<button></button>").text("Enviar Reclamo →");
+	btnEnviar.attr("type","submit");
+	btnEnviar.attr("class","btn btn-lg btn-success btn-block");
+	btnEnviar.click(function(){
+		guardarReclamo(componente, latitud, longitud);
+	});
+	var divBody	= $("<div></div>").attr("class","modal-body");
+	divBody.append(divGroup);
+	divBody.append(btnEnviar);
+	var titulo = $("<h4></h4>").text("Describa su Reclamo:");
+	titulo.attr("class","modal-title");
+	var divHeader = $("<div></div>").attr("class","modal-header");
+	divHeader.append(titulo);
+	var divContent = $("<div></div>").attr("class","modal-content");
+	divContent.append(divHeader);
+	divContent.append(divBody);
+	
+	$(panelDescripcion).append(divContent);	
+	
+	//Crear el popUp
+	$(panelDescripcion).dialog({
+		closeText: 'X'
+	});
+	//Muestra el popUp
+	$(panelDescripcion).show();
+}
+
+/*
+Funcion que crea un popUP que muestra la ayuda para ingresar un reclamo
+*/
+function crearAyudaPopUp(){
+	var cell = document.getElementById("panelAyuda");
 	if ( !cell.hasChildNodes() ){
-			
-		//Crear el contenido del popUP
-		var textArea = $("<textarea></textarea>").attr("class","form-control");
-		textArea.attr("type","textarea");
-		textArea.attr("name","message");
-		textArea.attr("id","txtDescripcion");
-		textArea.attr("placeholder","Escriba su mensaje aquí.");
-		textArea.attr("maxlength","500");
-		textArea.attr("rows","7");
-		var lblText = $("<label></label>").text("Escriba una descripcion de su reclamo (máx 500 caracteres)");
-		lblText.attr("for","name");
-		var divisor = $("<div></div>").attr("class","box-content");
-		var divGroup = $("<div></div>").attr("class","form-group");
-		divGroup.append(lblText);
-		divGroup.append(divisor);
-		divGroup.append(textArea);
-		var btnEnviar = $("<button></button>").text("Enviar Reclamo →");
-		btnEnviar.attr("type","submit");
-		btnEnviar.attr("class","btn btn-lg btn-success btn-block");
-		btnEnviar.click(function(){
-			guardarReclamo(componente, latitud, longitud);
-		});
-		var divBody	= $("<div></div>").attr("class","modal-body");
-		divBody.append(divGroup);
-		divBody.append(btnEnviar);
-		var titulo = $("<h4></h4>").text("Describa su Reclamo:");
+		var titulo = $("<h1></h1>").text("Ayuda!");
 		titulo.attr("class","modal-title");
 		var divHeader = $("<div></div>").attr("class","modal-header");
 		divHeader.append(titulo);
+		var lblText = $("<label></label>").text("Para ingresar un reclamo en el mapa debe hacer doble click sobre el mismo.");
+		var divGroup = $("<div></div>").attr("class","form-group");
+		divGroup.append(lblText);
+		var divBody	= $("<div></div>").attr("class","modal-body");
+		divBody.append(divGroup);
 		var divContent = $("<div></div>").attr("class","modal-content");
 		divContent.append(divHeader);
 		divContent.append(divBody);
-		
-		$(panelDescripcion).append(divContent);
-		//Crear el popUp
-		$(panelDescripcion).dialog({
-			closeText: 'X'
-		});
-		//Muestra el popUp
-		$(panelDescripcion).show();
+		$(panelAyuda).append(divContent);
 	}
+	//Crear el popUp
+	$(panelAyuda).dialog({
+		closeText: 'X'
+	});
+	//Muestra el popUp
+	$(panelAyuda).show();
 }
